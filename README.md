@@ -1,2 +1,2 @@
 # Database_project2024
-You are asked to implement a grade book to keep track student grades for several couses that a professor teaches. Courses should have the information of department, course number, course name, semester, and year.
+INCLUDE The minimum required content of the file should contains the instructions to compile and execute your code;
