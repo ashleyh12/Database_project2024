@@ -42,6 +42,8 @@ WHERE AssignmentID = 2
 AND StudentID IN (
     SELECT StudentID FROM Student WHERE LastName LIKE '%Q%'
     );
+
+
 -- Complex Join Including Scores: This more complex query retrieves a list of students in CourseID 1, along with their scores on all assignments. It joins several tables to collect this information:
 -- Student to get student names.
 -- Enrollment to filter students by course.
