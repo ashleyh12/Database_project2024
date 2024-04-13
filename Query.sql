@@ -42,5 +42,22 @@ FROM
 WHERE 
     c.CourseID = 1;
 
+-- Get the average, highest, and lowest scores for each assignment in CourseID 
 
+SELECT 
+    a.Name AS AssignmentName,
+    AVG(sc.Score) AS AverageScore,
+    MAX(sc.Score) AS HighestScore,
+    MIN(sc.Score) AS LowestScore
+FROM 
+    Student s
+    JOIN Enrollment e ON s.StudentID = e.StudentID
+    JOIN Scores sc ON s.StudentID = sc.StudentID
+    JOIN Assignment a ON sc.AssignmentID = a.AssignmentID
+    JOIN AssignmentCategory ac ON a.CategoryID = ac.CategoryID
+    JOIN Course c ON ac.CourseID = c.CourseID
+WHERE 
+    c.CourseID = 1
+GROUP BY 
+    a.Name;
 
