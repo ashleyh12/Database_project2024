@@ -22,8 +22,20 @@ FROM Student s
 JOIN Enrollment e ON s.StudentID = e.StudentID
 WHERE e.CourseID = 1;
 
--- Complex Join Including Scores: This more complex query retrieves a list of students in CourseID 1, along with their scores on all assignments. It joins several tables to collect this information:
+-- Add an assignment to a course
+INSERT INTO Assignment (AssignmentID, CategoryID, Name) VALUES (3, 2, 'Final Exam');
 
+-- Change the percentages of the categories for a course
+UPDATE AssignmentCategory 
+SET Weight = 60.00 
+WHERE CourseID = 1 AND Name = 'Exam';
+
+-- Add 2 points to the score of each student on an assignment
+UPDATE Scores 
+SET Score = Score + 2 
+WHERE AssignmentID = 2;
+
+-- Complex Join Including Scores: This more complex query retrieves a list of students in CourseID 1, along with their scores on all assignments. It joins several tables to collect this information:
 -- Student to get student names.
 -- Enrollment to filter students by course.
 -- Scores to get the scores for each student.
