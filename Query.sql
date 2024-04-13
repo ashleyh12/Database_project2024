@@ -11,7 +11,7 @@ INSERT INTO AssignmentCategory (CategoryID, CourseID, Name, Weight) VALUES (1, 1
 -- Insert into Assignment: Adds two assignments, "HW1" under the Homework category and "Midterm" under the Exam category.
 INSERT INTO Assignment (AssignmentID, CategoryID, Name) VALUES (1, 1, 'HW1'), (2, 2, 'Midterm');
 -- Insert into Scores: Records scores for both students on both assignments, such as John scoring 85 on HW1 and 78 on Midterm.
-INSERT INTO Scores (ScoreID, AssignmentID, StudentID, Score) VALUES (1, 1, 1, 85.00), (2, 1, 2, 90.00), (3, 2, 1, 78.00), (4, 2, 2, 88.00);
+INSERT INTO Scores (ScoreID, AssignmentID, StudentID, Score) VALUES (1, 2, 1, 85.00), (2, 1, 2, 90.00), (3, 2, 1, 78.00), (4, 2, 2, 88.00);
 
 -- Select from Student: Retrieves all records from the Student table.
 SELECT * FROM Student;
@@ -81,4 +81,3 @@ WHERE
     c.CourseID = 1
 GROUP BY 
     a.Name;
-
