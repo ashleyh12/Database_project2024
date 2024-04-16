@@ -87,3 +87,38 @@ WHERE
     c.CourseID = 1
 GROUP BY 
     a.Name;
+
+-- Task 11:
+SELECT 
+    s.StudentID, s.FirstName, s.LastName,
+    AVG(sc.Score) AS AverageGrade
+FROM 
+    Student s
+    JOIN Scores sc ON s.StudentID = sc.StudentID
+GROUP BY 
+    s.StudentID;
+
+-- Task 12:
+-- Compute the average grade for a student, where the lowest score for a given category is dropped
+-- This query calculates the average grade for each student after dropping their lowest score for each assignment category.
+WITH MinScorePerCategory AS (
+    SELECT 
+        s.StudentID,
+        a.CategoryID,
+        MIN(sc.Score) AS MinScore
+    FROM 
+        Student s
+        JOIN Scores sc ON s.StudentID = sc.StudentID
+        JOIN Assignment a ON sc.AssignmentID = a.AssignmentID
+    GROUP BY 
+        s.StudentID, a.CategoryID
+)
+SELECT 
+    s.StudentID, s.FirstName, s.LastName,
+    AVG(CASE WHEN sc.Score > m.MinScore THEN sc.Score ELSE NULL END) AS AverageGrade
+FROM 
+    Student s
+    JOIN Scores sc ON s.StudentID = sc.StudentID
+    JOIN MinScorePerCategory m ON s.StudentID = m.StudentID AND sc.AssignmentID = m.CategoryID
+GROUP BY 
+    s.StudentID;
