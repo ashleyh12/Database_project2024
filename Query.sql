@@ -105,7 +105,8 @@ WITH MinScorePerCategory AS (
     SELECT 
         s.StudentID,
         a.CategoryID,
-        MIN(sc.Score) AS MinScore
+        MIN(sc.Score) AS MinScore,
+        COUNT(*) AS AssignmentCount
     FROM 
         Student s
         JOIN Scores sc ON s.StudentID = sc.StudentID
@@ -115,7 +116,11 @@ WITH MinScorePerCategory AS (
 )
 SELECT 
     s.StudentID, s.FirstName, s.LastName,
-    AVG(CASE WHEN sc.Score > m.MinScore THEN sc.Score ELSE NULL END) AS AverageGrade
+    AVG(CASE 
+        WHEN m.AssignmentCount = 1 THEN sc.Score
+        WHEN sc.Score > m.MinScore THEN sc.Score 
+        ELSE NULL 
+    END) AS AverageGrade
 FROM 
     Student s
     JOIN Scores sc ON s.StudentID = sc.StudentID
