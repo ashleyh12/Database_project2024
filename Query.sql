@@ -16,12 +16,6 @@ INSERT INTO Scores (ScoreID, AssignmentID, StudentID, Score) VALUES (1, 2, 1, 85
 -- Select from Student: Retrieves all records from the Student table.
 SELECT * FROM Student;
 
--- Task 5:
--- Join Student and Enrollment: Fetches the details of students enrolled in the course with CourseID 1 (CS101). This query specifically filters to show students in this course
-SELECT s.StudentID, s.FirstName, s.LastName
-FROM Student s
-JOIN Enrollment e ON s.StudentID = e.StudentID
-WHERE e.CourseID = 1;
 
 -- Task 7:
 -- Add an assignment to a course
