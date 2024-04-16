@@ -16,25 +16,30 @@ INSERT INTO Scores (ScoreID, AssignmentID, StudentID, Score) VALUES (1, 2, 1, 85
 -- Select from Student: Retrieves all records from the Student table.
 SELECT * FROM Student;
 
+-- Task 5:
 -- Join Student and Enrollment: Fetches the details of students enrolled in the course with CourseID 1 (CS101). This query specifically filters to show students in this course
 SELECT s.StudentID, s.FirstName, s.LastName
 FROM Student s
 JOIN Enrollment e ON s.StudentID = e.StudentID
 WHERE e.CourseID = 1;
 
+-- Task 7:
 -- Add an assignment to a course
 INSERT INTO Assignment (AssignmentID, CategoryID, Name) VALUES (3, 2, 'Final Exam');
 
+-- Task 8:
 -- Change the percentages of the categories for a course
 UPDATE AssignmentCategory 
 SET Weight = 60.00 
 WHERE CourseID = 1 AND Name = 'Exam';
 
+-- Task 9:
 -- Add 2 points to the score of each student on an assignment
 UPDATE Scores 
 SET Score = Score + 2 
 WHERE AssignmentID = 2;
 
+-- Task 10:
 -- Add 2 points to  students whose last name contains a ‘Q’
 UPDATE Scores
 SET Score = Score + 2
@@ -43,7 +48,7 @@ AND StudentID IN (
     SELECT StudentID FROM Student WHERE LastName LIKE '%Q%'
     );
 
-
+-- Task 5:
 -- Complex Join Including Scores: This more complex query retrieves a list of students in CourseID 1, along with their scores on all assignments. It joins several tables to collect this information:
 -- Student to get student names.
 -- Enrollment to filter students by course.
@@ -63,6 +68,7 @@ FROM
 WHERE 
     c.CourseID = 1;
 
+-- Task 4:
 -- Get the average, highest, and lowest scores for each assignment in CourseID 
 
 SELECT 
