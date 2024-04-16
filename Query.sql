@@ -87,3 +87,42 @@ WHERE
     c.CourseID = 1
 GROUP BY 
     a.Name;
+
+-- Task 11:
+-- Function to compute the grade for a student with the lowest score dropped for each category
+-- Function to compute the grade for a student
+CREATE FUNCTION ComputeStudentGrade(student_id INT)
+RETURNS DECIMAL(5,2)
+BEGIN
+    DECLARE total_score DECIMAL(5,2);
+    
+    -- Calculate total score for the student
+    SELECT SUM(s.Score) INTO total_score
+    FROM Scores s
+    WHERE s.StudentID = student_id;
+    
+    -- Return total score
+    RETURN total_score;
+END;
+
+-- Task 12:
+-- Function to compute the grade for a student with the lowest score dropped for each category
+CREATE FUNCTION ComputeStudentGradeWithDrop(student_id INT)
+RETURNS DECIMAL(5,2)
+BEGIN
+    DECLARE total_score DECIMAL(5,2);
+    
+    -- Calculate total score for the student, dropping the lowest score for each category
+    SELECT SUM(score) INTO total_score
+    FROM (
+        SELECT MAX(s.Score) AS score
+        FROM Scores s
+        JOIN Assignment a ON s.AssignmentID = a.AssignmentID
+        JOIN AssignmentCategory ac ON a.CategoryID = ac.CategoryID
+        WHERE s.StudentID = student_id
+        GROUP BY ac.CategoryID
+    ) AS subquery;
+    
+    -- Return total score
+    RETURN total_score;
+END;
